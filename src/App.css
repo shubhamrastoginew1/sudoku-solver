@@ -3,36 +3,119 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: aqua;
+    background-color: #EEEEEE;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    width: 100%;
+    font-family: sans-serif;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.5rem;
+    width: 100%;
 }
 .main-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    /* border: 2px solid red; */
 }
+.left{
+    width: 13vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(237, 240, 255);
+}
+.levels{
+    font-family: sans-serif;
+    font-style: italic;
+    color: rgb(101, 101, 101);
+    width: 100%;
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: default;
+    transition: 0.5s;
+}
+.notActive:hover{
+    background-color: rgb(196, 196, 233);
+}
+.active{
+    background-color: rgb(114, 113, 216);
+    color: white;
+}
+
+
+.right{
+    border: 2px solid red;
+}
+.main{
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: nowrap;
+    height: 90vh;
+}
+.header{
+    width: 100vw;
+    text-align: center;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ab60d9;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    cursor: default;
+}
+
+
 .buttons{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    width: 30vw;
+    /* width: 30vw; */
+    width: 50%;
+    flex-wrap: wrap;
 }
 
 .btn{
-    font-size: 1.6rem;
+    font-size: 1rem;
     font-family: sans-serif;
-    padding: 0.5rem 2rem;
+    font-style: italic;
+    padding: 0.5rem 1rem;
     border: none;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     border-radius: 0.7rem;
+
+    -webkit-box-shadow: 0 0 1px 1px black;
+    -moz-box-shadow: 0 0 1px 1px black;
+    box-shadow: 0 0 10px 0.001px grey;
+    transition: 0.5s;
 }
 .submit{
     background-color: rgb(54, 179, 54);
-    color: white;
+    color: rgb(255, 255, 255);
+}
+.submit:hover{
+    box-shadow: none;
+    background-color: rgb(11, 149, 11);
 }
 .submit:active{
     background-color: green;
@@ -41,6 +124,23 @@ body{
 .submit:focus{
     border: 2px solid rgb(2, 70, 2);
 }
+
+.checkNow{
+    background-color: #ab60d9;
+    color: rgb(255, 255, 255);
+}
+.checkNow:hover{
+    box-shadow: none;
+    background-color: #913ec4;
+}
+.checkNow:active{
+    background-color: #68179a;
+    color: white;
+}
+.checkNow:focus{
+    border: 2px solid #510780;
+}
+
 
 .reset{
     background-color: rgb(128, 127, 127);
@@ -53,16 +153,28 @@ body{
 .reset:focus{
     border: 2px solid rgb(2, 70, 2);
 }
+.reset:hover{
+    box-shadow: none;
+    
+}
 
 
 .board-row{
     display: flex;
     flex-direction: row;
-
+}
+.board{
+    -webkit-box-shadow: 0 0 1px 1px black;
+    -moz-box-shadow: 0 0 1px 1px black;
+    box-shadow: 0 0 20px 0.001px grey;
+    transition: 0.25s;
+}
+.board:hover{
+    box-shadow:none;
 }
 .box-container{
-    width: 5vw;
-    height: 5vw;
+    width: 4vw;
+    height: 4vw;
     background-color: #2b2a2a;
 }
 .box-input{
@@ -70,14 +182,16 @@ body{
     cursor: text;
     display: block;
     box-sizing: border-box;
-    max-width:5vw;
+    max-width:4vw;
     height: inherit;
     border-radius: 2px;
     border: none;
-    border-bottom: 1px solid red;
-    border-right: 1px solid red;
-    font-size: 1.5rem;
+    border-bottom: 1px solid rgb(101, 101, 101);
+    border-right: 1px solid rgb(101, 101, 101);
+    font-size: 1.2rem;
     padding-left: 1.4vw;
+    font-family: sans-serif;
+    font-style: italic;
 }
 .box-input:focus {
     outline: none;
@@ -85,8 +199,26 @@ body{
 }
 
 .borderRight{
-    border-right: 3px solid red;
+    border-right: 3px solid rgb(101, 101, 101);
 }
-.borderBotttom{
-    border-bottom: 3px solid red;
+.borderBottom{
+    border-bottom: 3px solid rgb(101, 101, 101);
+}
+.borderTop{
+    border-top: 3px solid rgb(101, 101, 101);
+}
+.borderLeft{
+    border-left: 3px solid rgb(101, 101, 101);
+}
+.fixed{
+    background-color: rgb(188, 187, 187);
+    color: black;
+    font-weight: 600;
+}
+.invalid{
+    background-color: rgb(243, 62, 66);
+    color: white;
+}
+.valid{
+    background-color: skyblue;
 }
