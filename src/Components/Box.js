@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Box({arr, index, mainOnChange, status, arr2, isValid}){
 
@@ -13,7 +13,7 @@ export default function Box({arr, index, mainOnChange, status, arr2, isValid}){
         else{
             mainOnChange(e.target.value, index);
             if( status[index]=== "" &&  e.target.value!== ""){
-                let a = isValid(Math.floor(index/9), index%9, e.target.value);
+                let a = isValid(Math.floor(index/9), index%9, e.target.value, arr2);
                 if(a===0){
                     setV(" invalid");
                 }
@@ -32,6 +32,10 @@ export default function Box({arr, index, mainOnChange, status, arr2, isValid}){
     let c4 = " 4";
     let color = " ";
     const [validity, setV] = useState(" ");
+    // useEffect(() => {
+    //     setV(" ");
+    //   }, [status]);
+
 
     if(arr[index]==="" && validity!=" ")
         setV(" ");

@@ -1,18 +1,23 @@
 import Board from "./Board";
 import {useState } from "react";
 import Left from "./Left";
+import Confetti from 'react-confetti';
 
 export default function Home() {
-  const easy1D = Array(81).fill("");
-  const easy2D = [["4", ".", ".", ".", ".", "6", "2", ".", "."],
-                  ["3", "8", ".", ".", "5", ".", ".", ".", "."],
-                  [".", "1", ".", "2", ".", ".", "7", "5", "3"],
-                  ["6", "5", "1", "9", ".", ".", ".", "7", "4"],
-                  [".", ".", ".", "7", ".", "3", "1", ".", "."],
-                  ["7", ".", ".", ".", "1", "5", "9", "6", "2"],
-                  [".", "9", "4", "6", "7", ".", ".", "3", "."],
-                  ["1", ".", ".", ".", ".", "9", "8", ".", "."],
-                  ["5", ".", ".", ".", ".", "1", "6", ".", "9"]];
+    
+    const [difficulty,  setDifficulty] = useState(1);
+    const [confettiState, setConfetti] = useState(false);
+
+  let easy1D = Array(81).fill("");
+  const easy2D = [[4, ".", ".", ".", ".", 6, 2, ".", "."],
+                  [3, 8, ".", ".", 5, ".", ".", ".", "."],
+                  [".", 1, ".", 2, ".", ".", 7, 5, 3],
+                  [6, 5, 1, 9, ".", ".", ".", 7, 4],
+                  [".", ".", ".", 7, ".", 3, 1, ".", "."],
+                  [7, ".", ".", ".", 1, 5, 9, 6, 2],
+                  [".", 9, 4, 6, 7, ".", ".", 3, "."],
+                  [1, ".", ".", ".", ".", 9, 8, ".", "."],
+                  [5, ".", ".", ".", ".", 1, 6, ".", 9]];
 
   for(let i=0;i<81;i++){
     if(easy2D[Math.floor(i / 9)][i % 9]==="."){
@@ -21,8 +26,10 @@ export default function Home() {
     else
       easy1D[i] = easy2D[Math.floor(i / 9)][i % 9];
   }
+  let [arr, setArr] = useState(easy1D);
+  let [arr2, setArr2] = useState(easy2D);
 
-  const med1D = Array(81).fill("");
+  let med1D = Array(81).fill("");
   const med2D = [["9", "6", ".", "4", ".", "1", "3", ".", "."],
                   [".", "7", ".", "9", ".", ".", "5", "6", "."],
                   [".", ".", ".", "7", ".", ".", ".", "2", "."],
@@ -41,7 +48,7 @@ export default function Home() {
       med1D[i] = med2D[Math.floor(i / 9)][i % 9];
   }
 
-  const hard1D = Array(81).fill("");
+  let hard1D = Array(81).fill("");
   const hard2D = [[".", ".", ".", "5", ".", ".", "4", "2", "."],
                   ["6", ".", ".", ".", "4", ".", ".", ".", "."],
                   [".", "5", ".", ".", ".", ".", ".", ".", "3"],
@@ -60,7 +67,7 @@ export default function Home() {
       hard1D[i] = hard2D[Math.floor(i / 9)][i % 9];
   }
 
-  const exp1D = Array(81).fill("");
+  let exp1D = Array(81).fill("");
   const exp2D = [[".", ".", "5", "6", ".", "2", ".", ".", "."],
                   ["7", ".", ".", "8", "1", ".", "4", ".", "."],
                   [".", ".", ".", ".", ".", ".", "5", "6", "."],
@@ -107,7 +114,7 @@ export default function Home() {
 
 
 
-  const [arr, setArr] = useState(easy1D);
+
   console.log("rer");
   const x = new Array(9);
   for (let i = 0; i < 9; i++) {
@@ -118,13 +125,11 @@ export default function Home() {
   }
 
 
-  const [arr2, setArr2] = useState(easy2D);
-
-  const [difficulty,  setDifficulty] = useState(1);
 
 
 
   const mainOnChange = (val, ind) => {
+    setConfetti(false);
     let deep = [...arr];
     deep[ind] = val;
     setArr(deep);
@@ -136,167 +141,51 @@ export default function Home() {
     setArr2(deep2);
   }
 
-//   let submitHandler = () => {
-//     if(window.confirm("Do you really want to see the solution?")===false){
-//         return;
-//     }
-//     let flag = -1;
-//     let allFilled = 1;
-//     for (let i = 0; i < 81; i++) {
-//       if (arr[i] === ""){
-//         allFilled = 0;
-//         continue;
-//       }
-//       else if (1 <= Number(arr[i]) && Number(arr[i]) <= 9) {
-//         continue;
-//       }
-//       else {
-//         flag = i;
-//         break;
-//       }
-//     }
-//     if(allFilled===1){
-//         return;
-//     }
-//     if (flag !== -1) {
-//       let d = [...arr];
-//       d = Array(81).fill("");
-//       setArr(d);
-//       let d2 = [...arr2];
-//       d2 = x;
-//       setArr2(d2);
-//     }
-//     else {
-//       let f = 1; //to check if the existing one is valid or not...
 
-//       for (let m = 0; m < 9; m++) {
-//         for (let n = 0; n < 9; n++) {
-//           if (arr2[m][n] === ".") {
-//             continue;
-//           }
-//           else {
-//             let temp = isValid(m, n, arr2[m][n]);
-//             // console.log(temp);
-//             if (temp === 0) {
-//               console.log("amin");
-//               f = 0;
-//               break;
-//             }
-//           }
-//         }
-//         if (f === 0)
-//           break;
-//       }
-//       if (f === 0) {
-//         let deep = [...arr];
-//         for (let i = 0; i < 81; i++) {
-//           deep[i] = "";
-//         }
-//         setArr(deep);
-//         let deep2 = [...arr2];
-//         deep2 = x;
-//         setArr2(deep2);
-//       }
-//       else {
-//         solveSudoku();
-//       }
-//     }
-//   }
-let submitHandler = () => {
+let SolutionSubmitHandler = () => {
     if(window.confirm("Do you really want to see the solution?")===false){
         return;
     }
-    let d = [...arr];
-    let d2 = [...arr2];
+
     if(difficulty===1){
-        d = easy1D;
-        d2 = easy2D;
-        setArr(d);
-        setArr2(d2);
+        solveSudoku(easy2D);
     }
     if(difficulty===2){
-        d = med1D;
-        d2 = med2D;
-        setArr(d);
-        setArr2(d2);
+        solveSudoku(med2D);
     }
     if(difficulty===3){
-        d = hard1D;
-        d2 = hard2D;
-        setArr(d);
-        setArr2(d2);
+        solveSudoku(hard2D);
     }
     if(difficulty===4){
-        d = exp1D;
-        d2 = exp2D;
-        setArr(d);
-        setArr2(d2);
+        solveSudoku(exp2D);
     }
-    // for (let i = 0; i < 81; i++) {
-    //   if (arr[i] === ""){
-    //     allFilled = 0;
-    //     continue;
-    //   }
-    //   else if (1 <= Number(arr[i]) && Number(arr[i]) <= 9) {
-    //     continue;
-    //   }
-    //   else {
-    //     flag = i;
-    //     break;
-    //   }
-    // }
-    // if(allFilled===1){
-    //     return;
-    // }
-    // if (flag !== -1) {
-    //   let d = [...arr];
-    //   d = Array(81).fill("");
-    //   setArr(d);
-    //   let d2 = [...arr2];
-    //   d2 = x;
-    //   setArr2(d2);
-    // }
-    // else {
-    //   let f = 1; //to check if the existing one is valid or not...
-
-    //   for (let m = 0; m < 9; m++) {
-    //     for (let n = 0; n < 9; n++) {
-    //       if (arr2[m][n] === ".") {
-    //         continue;
-    //       }
-    //       else {
-    //         let temp = isValid(m, n, arr2[m][n]);
-    //         // console.log(temp);
-    //         if (temp === 0) {
-    //           console.log("amin");
-    //           f = 0;
-    //           break;
-    //         }
-    //       }
-    //     }
-    //     if (f === 0)
-    //       break;
-    //   }
-    //   if (f === 0) {
-    //     let deep = [...arr];
-    //     for (let i = 0; i < 81; i++) {
-    //       deep[i] = "";
-    //     }
-    //     setArr(deep);
-    //     let deep2 = [...arr2];
-    //     deep2 = x;
-    //     setArr2(deep2);
-    //   }
-    //   else {
-        solveSudoku();
-    //   }
-    // }
   }
+  let CheckSubmitHandler = ()=>{
+    for(let i=0;i<9;i++){
+        for(let j=0;j<9;j++){
+            if(arr2[i][j]==="."){
+                window.alert("Please fill all the cells");
+                return;
+            }
+            if(isValid(i, j, arr2[i][j], arr2)===0){
+                window.alert("Wrong Solution.. Try Again");
+                return;
+            }
+        }
+    }
+    window.alert("Correct...");
+    setConfetti(true);
+    setTimeout(() => {
+        setConfetti(false);
+    }, 3000);
+  }
+  
 
 
-  function solveSudoku() {
-    let ans = fill();
+  function solveSudoku(arr2) {
+    let ans = fill(arr2);
     if (ans === 1) {
+      setArr2(arr2);
       let d = [...arr];
       for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
@@ -306,31 +195,25 @@ let submitHandler = () => {
       setArr(d);
     }
     else {
-      let d = [...arr];
-      d = Array(81).fill("");
-      setArr(d);
-      let d2 = [...arr2];
-      d2 = x;
-      setArr2(d2);
+        alert("wrong");
     }
+    return;
   }
-  function fill() {
+  function fill(arr2) {
+    let allFilled = 1;
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
         if (arr2[i][j] === ".") {
+            allFilled = 0;
           for (let k = 1; k <= 9; k++) {
-            if (isValid(i, j, k) === 1) {
+            if (isValid(i, j, k, arr2) === 1) {
 
-              let deep = [...arr2];
-              deep[i][j] = k;
-              setArr2(deep);
+            arr2[i][j] = k;
 
-              if (fill() === 1) {
+              if (fill(arr2) === 1) {
                 return 1;
               } else {
-                let deep2 = [...arr2];
-                deep2[i][j] = ".";
-                setArr2(deep2);
+                arr2[i][j] = ".";
               }
             }
           }
@@ -338,14 +221,10 @@ let submitHandler = () => {
         }
       }
     }
-
-    let d = [...arr2];
-    d = x;
-    setArr2(d);
     return 1;
   }
 
-  function isValid(i, j, num) {
+  function isValid(i, j, num, arr2) { 
     let a = 1;
     if(!(Number(num)>0 || Number(num)<9)){
         a = 0;
@@ -427,14 +306,22 @@ let submitHandler = () => {
         <div className="center">
           <Board arr={arr} mainOnChange={mainOnChange} easy1D={easy1D} med1D={med1D} hard1D={hard1D} exp1D={exp1D} difficulty={difficulty} arr2={arr2} isValid={isValid}/>
           <div className="buttons">
-            <button type="submit" className="submit btn" onClick={submitHandler} >Solution </button>
-            <button type="submit" className="checkNow btn" onClick={resetHandler} >Check Now</button>
+            <button type="submit" className="submit btn" onClick={SolutionSubmitHandler} >Solution </button>
+            <button type="submit" className="checkNow btn" onClick={CheckSubmitHandler} >Check Now</button>
             <button type="reset" className="reset btn" onClick={resetHandler} >Reset</button>
           </div>
         </div>
+        {
+            confettiState?(
+                <Confetti  className="confetti"/>
+
+            ) : (
+                <></>
+            )
+        }
 
         <div className="right">
-          Timer
+          {/* Timer */}
         </div>
 
       </div>
@@ -443,5 +330,3 @@ let submitHandler = () => {
     </div>
   );
 }
-
-
